@@ -1,0 +1,11 @@
+export enum StatusP {
+  TBR = 'TBR',
+
+  HOLDREFURB = 'HOLDREFURB',
+
+  HOLDREPAIR = 'HOLDREPAIR',
+
+  REFURBBED = 'REFURBBED',
+
+  REPAIRED = 'REPAIRED',
+}

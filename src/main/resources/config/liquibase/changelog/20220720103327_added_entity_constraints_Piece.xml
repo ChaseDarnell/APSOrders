@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Piece.
+    -->
+    <changeSet id="20220720103327-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="piece_id"
+                                 baseTableName="rel_piece__order"
+                                 constraintName="fk_rel_piece__order__piece_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="piece"/>
+
+        <addForeignKeyConstraint baseColumnNames="order_id"
+                                 baseTableName="rel_piece__order"
+                                 constraintName="fk_rel_piece__order__order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_order"/>
+    </changeSet>
+</databaseChangeLog>
