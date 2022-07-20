@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-piece-heading" data-cy="PieceCreateUpdateHeading" jhiTranslate="apsOrdersApp.piece.home.createOrEditLabel">
+        Create or edit a Piece
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="apsOrdersApp.piece.serial" for="field_serial">Serial</label>
+          <input type="text" class="form-control" name="serial" id="field_serial" data-cy="serial" formControlName="serial" />
+          <div *ngIf="editForm.get('serial')!.invalid && (editForm.get('serial')!.dirty || editForm.get('serial')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('serial')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="apsOrdersApp.piece.model" for="field_model">Model</label>
+          <input type="text" class="form-control" name="model" id="field_model" data-cy="model" formControlName="model" />
+          <div *ngIf="editForm.get('model')!.invalid && (editForm.get('model')!.dirty || editForm.get('model')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('model')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="apsOrdersApp.piece.desc" for="field_desc">Desc</label>
+          <input type="text" class="form-control" name="desc" id="field_desc" data-cy="desc" formControlName="desc" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="apsOrdersApp.piece.manu" for="field_manu">Manu</label>
+          <input type="text" class="form-control" name="manu" id="field_manu" data-cy="manu" formControlName="manu" />
+          <div *ngIf="editForm.get('manu')!.invalid && (editForm.get('manu')!.dirty || editForm.get('manu')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('manu')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="apsOrdersApp.piece.notes" for="field_notes">Notes</label>
+          <input type="text" class="form-control" name="notes" id="field_notes" data-cy="notes" formControlName="notes" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="apsOrdersApp.piece.statusP" for="field_statusP">Status P</label>
+          <select class="form-control" name="statusP" formControlName="statusP" id="field_statusP" data-cy="statusP">
+            <option [ngValue]="null">{{ 'apsOrdersApp.StatusP.null' | translate }}</option>
+            <option *ngFor="let statusP of statusPValues" [value]="statusP">{{ 'apsOrdersApp.StatusP.' + statusP | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="apsOrdersApp.piece.order" for="field_orders">Order</label>
+          <select class="form-control" id="field_orders" data-cy="order" multiple name="orders" formControlName="orders">
+            <option
+              [ngValue]="getSelectedOrder(orderOption, editForm.get('orders')!.value)"
+              *ngFor="let orderOption of ordersSharedCollection; trackBy: trackOrderById"
+            >
+              {{ orderOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

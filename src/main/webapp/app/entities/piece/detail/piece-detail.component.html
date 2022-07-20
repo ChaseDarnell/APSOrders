@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="piece">
+      <h2 data-cy="pieceDetailsHeading"><span jhiTranslate="apsOrdersApp.piece.detail.title">Piece</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ piece.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="apsOrdersApp.piece.serial">Serial</span></dt>
+        <dd>
+          <span>{{ piece.serial }}</span>
+        </dd>
+        <dt><span jhiTranslate="apsOrdersApp.piece.model">Model</span></dt>
+        <dd>
+          <span>{{ piece.model }}</span>
+        </dd>
+        <dt><span jhiTranslate="apsOrdersApp.piece.desc">Desc</span></dt>
+        <dd>
+          <span>{{ piece.desc }}</span>
+        </dd>
+        <dt><span jhiTranslate="apsOrdersApp.piece.manu">Manu</span></dt>
+        <dd>
+          <span>{{ piece.manu }}</span>
+        </dd>
+        <dt><span jhiTranslate="apsOrdersApp.piece.notes">Notes</span></dt>
+        <dd>
+          <span>{{ piece.notes }}</span>
+        </dd>
+        <dt><span jhiTranslate="apsOrdersApp.piece.statusP">Status P</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'apsOrdersApp.StatusP.' + piece.statusP }}">{{ piece.statusP }}</span>
+        </dd>
+        <dt><span jhiTranslate="apsOrdersApp.piece.order">Order</span></dt>
+        <dd>
+          <span *ngFor="let order of piece.orders; let last = last">
+            <a [routerLink]="['/order', order?.id, 'view']">{{ order.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/piece', piece.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
