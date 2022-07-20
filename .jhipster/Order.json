@@ -1,0 +1,72 @@
+{
+  "applications": ["APSOrders"],
+  "changelogDate": "20220720101414",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "jhi_order",
+  "fields": [
+    {
+      "fieldName": "driver",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pickUpDate",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "repairDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "deliveryDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "rOrderNum",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "invOrderNum",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "statusO",
+      "fieldType": "StatusO",
+      "fieldValues": "PICKED_UP,TBR,OB,REPAIRED,OFD,DELIVERED"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Order",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "piece",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "piece",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "customer",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "piece",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "piece",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

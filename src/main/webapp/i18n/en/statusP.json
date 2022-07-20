@@ -1,0 +1,12 @@
+{
+  "apsOrdersApp": {
+    "StatusP": {
+      "null": "",
+      "TBR": "TBR",
+      "HOLDREFURB": "HOLDREFURB",
+      "HOLDREPAIR": "HOLDREPAIR",
+      "REFURBBED": "REFURBBED",
+      "REPAIRED": "REPAIRED"
+    }
+  }
+}
