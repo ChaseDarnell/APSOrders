@@ -1,0 +1,70 @@
+
+application {
+  config {
+    baseName APSOrders,
+    applicationType monolith,
+    packageName com.apsorders.orders,
+    authenticationType jwt,
+    prodDatabaseType mysql,
+    clientFramework angular
+  }
+  entities *
+}
+
+entity Order {
+	driver String required,
+    companyLocale Customer,
+    pickUpDate ZonedDateTime required,
+    repairDate ZonedDateTime,
+    deliveryDate ZonedDateTime,
+    rOrderNum String required unique,
+    invOrderNum String unique,
+    pieces Piece,
+    statusO StatusO,
+    notes String
+    
+}
+
+entity Customer {
+	orders Order,
+    name String required,
+    locale String required unique,
+    notes String
+}
+
+entity Piece {
+	serial String required,
+    model String required,
+    desc String,
+    manu String required,
+    notes String,
+    statusP StatusP
+    
+}
+
+relationship OneToMany {
+  Order to Piece
+  Customer to Order
+}
+
+relationship ManyToOne {
+  Piece to Order
+}
+
+enum StatusO {
+	PICKED_UP,
+    TBR,
+    OB,
+    REPAIRED,
+    OFD,
+    DELIVERED
+}
+
+enum StatusP {
+	TBR,
+    HOLDREFURB,
+    HOLDREPAIR,
+    REFURBBED,
+    REPAIRED
+}
+    
